@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 
@@ -36,6 +37,24 @@ Route::group(['prefix' => 'admin','middleware' => 'admin_auth'], function () {
     Route::get('coupon/manage_coupon/{id}',[CouponController::class,'ManageCouponView']);
     //    update coupon status
     Route::get('coupon/status/{status}/{id}',[CouponController::class,'status']);
+
+    //    ==========size========
+    Route::get('size',[SizeController::class,'SizeView']);
+    Route::get('size/manage_size',[SizeController::class,'ManageSizeView']);
+    Route::post('size/manage_size_process',[SizeController::class,'ManageSizeProcess'])->name('size.ManageSizeProcess');
+    Route::get('size/deleteSize/{id}',[SizeController::class,'DeleteSize']);
+    Route::get('size/manage_size/{id}',[SizeController::class,'ManageSizeView']);
+    //    update size status
+    Route::get('size/status/{status}/{id}',[SizeController::class,'status']);
+
+    //    ==========color========
+    Route::get('color',[ColorController::class,'ColorView']);
+    Route::get('color/manage_color',[ColorController::class,'ManageColorView']);
+    Route::post('color/manage_color_process',[ColorController::class,'ManageColorProcess'])->name('color.ManageColorProcess');
+    Route::get('color/deleteColor/{id}',[ColorController::class,'DeleteColor']);
+    Route::get('color/manage_color/{id}',[ColorController::class,'ManageColorView']);
+    //    update color status
+    Route::get('color/status/{status}/{id}',[ColorController::class,'status']);
 
 
 });
