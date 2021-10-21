@@ -1,6 +1,7 @@
 @extends('AdminLayouts.app')
-@section('title','Categories')
-@section('category_select','active')
+
+@section('title','Coupons')
+@section('coupon_select','active')
 
 @section('content')
     <!-- MAIN CONTENT-->
@@ -10,9 +11,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="overview-wrap">
-                            <h2 class="title-1">Category</h2>
-                            <a  href="{{url('admin/category/manage_category')}}" class="au-btn au-btn-icon au-btn--blue">
-                                <i class="zmdi zmdi-plus"></i>Add Category</a>
+                            <h2 class="title-1">Coupons</h2>
+                            <a  href="{{url('admin/coupon/manage_coupon')}}" class="au-btn au-btn-icon au-btn--blue">
+                                <i class="zmdi zmdi-plus"></i>Add Coupon</a>
                         </div>
                     </div>
                 </div>
@@ -25,24 +26,26 @@
                                 <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Category Name</th>
-                                    <th>Category Slug</th>
+                                    <th>Coupon Title</th>
+                                    <th>Coupon Code</th>
+                                    <th>Coupon Value</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($result as $key=> $data)
-                                <tr>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>{{ $data->name }}</td>
-                                    <td>{{ $data->slug }}</td>
-                                    <td>
-                                        <a href="{{url('admin/category/manage_category/')}}/{{$data->id}}" class="btn btn-info"> <i class="fas fa-edit"></i></a>
-                                        <a href="{{url('admin/category/deleteCategory/')}}/{{$data->id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                    </td>
-{{--                                    <td> <a href="/deleteData/{{ $data->id }}" class="btn btn-danger">Delete</a> </td>--}}
+                                    <tr>
+                                        <td>{{ $key+1 }}</td>
+                                        <td>{{ $data->title }}</td>
+                                        <td>{{ $data->code }}</td>
+                                        <td>{{ $data->value }}</td>
+                                        <td>
+                                            <a href="{{url('admin/coupon/manage_coupon/')}}/{{$data->id}}" class="btn btn-info"> <i class="fas fa-edit"></i></a>
+                                            <a href="{{url('admin/coupon/deleteCoupon/')}}/{{$data->id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                        </td>
+                                        {{--                                    <td> <a href="/deleteData/{{ $data->id }}" class="btn btn-danger">Delete</a> </td>--}}
 
-                                </tr>
+                                    </tr>
                                 @endforeach
                                 </tbody>
                             </table>

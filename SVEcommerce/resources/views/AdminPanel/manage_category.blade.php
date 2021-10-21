@@ -1,7 +1,7 @@
 @extends('AdminLayouts.app')
 
 @section('title','Categories')
-
+@section('category_select','active')
 @section('content')
     <!-- MAIN CONTENT-->
     <div class="main-content">
