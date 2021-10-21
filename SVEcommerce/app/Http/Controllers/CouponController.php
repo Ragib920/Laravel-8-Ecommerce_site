@@ -65,6 +65,7 @@ class CouponController extends Controller
         $model->title= $request->post('title');
         $model->code= $request->post('code');
         $model->value= $request->post('value');
+        $model->status=1;
         $model->save();
         return back()->with('message',$msg);
     }
@@ -73,5 +74,13 @@ class CouponController extends Controller
     {
         CouponModel::where('id',$id)->delete();
         return back()->with('message','Coupon Deleted Successfully');
+    }
+
+    public function status($status,$id )
+    {
+        $model = CouponModel::Find($id);
+        $model->status=$status;
+        $model->save();
+        return back()->with('message','Coupon Status updated Successfully');
     }
 }

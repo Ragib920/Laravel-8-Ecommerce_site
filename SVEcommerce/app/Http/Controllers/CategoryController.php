@@ -60,6 +60,7 @@ class CategoryController extends Controller
 
         $model->name= $request->post('name');
         $model->slug= $request->post('slug');
+        $model->status=1;
         $model->save();
         return back()->with('message',$msg);
     }
@@ -68,6 +69,14 @@ class CategoryController extends Controller
     {
         CategoryModel::where('id',$id)->delete();
         return back()->with('message','Category Deleted Successfully');
+    }
+
+    public function status($status,$id )
+    {
+        $model = CategoryModel::Find($id);
+        $model->status=$status;
+        $model->save();
+        return back()->with('message',' Category status updated Successfully');
     }
 
 

@@ -19,12 +19,14 @@ Route::group(['prefix' => 'admin'], function () {
 //Admin Routes
 Route::group(['prefix' => 'admin','middleware' => 'admin_auth'], function () {
     Route::get('dashboard',[AdminController::class,'DashboardView']);
-//    ==========category========
+    //    ==========category========
     Route::get('category',[CategoryController::class,'CategoryView']);
     Route::get('category/manage_category',[CategoryController::class,'ManageCategoryView']);
     Route::post('category/manage_category_process',[CategoryController::class,'ManageCategoryProcess'])->name('category.ManageCategoryProcess');
     Route::get('category/deleteCategory/{id}',[CategoryController::class,'DeleteCategory']);
     Route::get('category/manage_category/{id}',[CategoryController::class,'ManageCategoryView']);
+    //    update category status
+    Route::get('category/status/{status}/{id}',[CategoryController::class,'status']);
 
     //    ==========coupon========
     Route::get('coupon',[CouponController::class,'CouponView']);
@@ -32,6 +34,8 @@ Route::group(['prefix' => 'admin','middleware' => 'admin_auth'], function () {
     Route::post('coupon/manage_coupon_process',[CouponController::class,'ManageCouponProcess'])->name('coupon.ManageCouponProcess');
     Route::get('coupon/deleteCoupon/{id}',[CouponController::class,'DeleteCoupon']);
     Route::get('coupon/manage_coupon/{id}',[CouponController::class,'ManageCouponView']);
+    //    update coupon status
+    Route::get('coupon/status/{status}/{id}',[CouponController::class,'status']);
 
 
 });

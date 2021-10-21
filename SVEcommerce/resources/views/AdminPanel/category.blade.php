@@ -27,6 +27,7 @@
                                     <th>No</th>
                                     <th>Category Name</th>
                                     <th>Category Slug</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -37,11 +38,16 @@
                                     <td>{{ $data->name }}</td>
                                     <td>{{ $data->slug }}</td>
                                     <td>
+                                        @if($data->status==1)
+                                            <a href="{{url('admin/category/status/0')}}/{{$data->id}}" class="btn-success btn-sm"> Activated</a>
+                                        @elseif($data->status==0)
+                                            <a href="{{url('admin/category/status/1')}}/{{$data->id}}" class="btn btn-warning btn-sm">Deactivated</a>
+                                        @endif
+                                    </td>
+                                    <td>
                                         <a href="{{url('admin/category/manage_category/')}}/{{$data->id}}" class="btn btn-info"> <i class="fas fa-edit"></i></a>
                                         <a href="{{url('admin/category/deleteCategory/')}}/{{$data->id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     </td>
-{{--                                    <td> <a href="/deleteData/{{ $data->id }}" class="btn btn-danger">Delete</a> </td>--}}
-
                                 </tr>
                                 @endforeach
                                 </tbody>

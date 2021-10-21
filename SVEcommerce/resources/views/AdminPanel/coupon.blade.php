@@ -29,7 +29,9 @@
                                     <th>Coupon Title</th>
                                     <th>Coupon Code</th>
                                     <th>Coupon Value</th>
+                                    <th>Status</th>
                                     <th>Action</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -40,10 +42,17 @@
                                         <td>{{ $data->code }}</td>
                                         <td>{{ $data->value }}</td>
                                         <td>
-                                            <a href="{{url('admin/coupon/manage_coupon/')}}/{{$data->id}}" class="btn btn-info"> <i class="fas fa-edit"></i></a>
-                                            <a href="{{url('admin/coupon/deleteCoupon/')}}/{{$data->id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                            @if($data->status==1)
+                                                <a href="{{url('admin/coupon/status/0')}}/{{$data->id}}" class="btn-success btn-sm"> Activated</a>
+                                            @elseif($data->status==0)
+                                                <a href="{{url('admin/coupon/status/1')}}/{{$data->id}}" class="btn btn-warning btn-sm">Deactivated</a>
+                                            @endif
                                         </td>
-                                        {{--                                    <td> <a href="/deleteData/{{ $data->id }}" class="btn btn-danger">Delete</a> </td>--}}
+                                        <td>
+                                            <a href="{{url('admin/coupon/manage_coupon/')}}/{{$data->id}}" class="btn btn-info"> <i class="fas fa-edit"></i></a>
+                                            <a href="{{url('admin/coupon/deleteCoupon/')}}/{{$data->id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                        </td>
+
 
                                     </tr>
                                 @endforeach
