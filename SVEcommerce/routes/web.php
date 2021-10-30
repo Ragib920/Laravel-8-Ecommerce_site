@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -56,5 +57,15 @@ Route::group(['prefix' => 'admin','middleware' => 'admin_auth'], function () {
     //    update color status
     Route::get('color/status/{status}/{id}',[ColorController::class,'status']);
 
+    //    ==========product========
+    Route::get('product',[ProductController::class,'ProductView']);
+    Route::get('product/manage_product',[ProductController::class,'ManageProductView']);
+    Route::post('product/manage_product_process',[ProductController::class,'ManageProductProcess'])->name('product.ManageProductProcess');
+    Route::get('product/deleteProduct/{id}',[ProductController::class,'DeleteProduct']);
+    Route::get('product/manage_product/{id}',[ProductController::class,'ManageProductView']);
+    //    update product status
+    Route::get('product/status/{status}/{id}',[ProductController::class,'status']);
+    //product attribute delete
+    Route::get('product/product_attr_delete/{paid}/{pid}',[ProductController::class,'product_attr_delete']);
 
 });

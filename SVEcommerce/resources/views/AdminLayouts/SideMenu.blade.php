@@ -30,7 +30,7 @@
                 </li>
                 <li class=" @yield('product_select') ">
                     <a href="{{url('admin/product')}}">
-                        <i class="fas fa-box-open"></i>Product</a>
+                        <i class="fab fa-product-hunt"></i>Product</a>
                 </li>
             </ul>
         </nav>
