@@ -67,5 +67,7 @@ Route::group(['prefix' => 'admin','middleware' => 'admin_auth'], function () {
     Route::get('product/status/{status}/{id}',[ProductController::class,'status']);
     //product attribute delete
     Route::get('product/product_attr_delete/{paid}/{pid}',[ProductController::class,'product_attr_delete']);
+    //product image delete
+    Route::get('product/product_images_delete/{paid}/{pid}',[ProductController::class,'product_images_delete']);
 
 });

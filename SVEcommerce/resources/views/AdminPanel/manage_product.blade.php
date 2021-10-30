@@ -133,6 +133,54 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="card">
+                                <div class="card-header">Product Images</div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <div class="row" id="product_images_box">
+                                            @php
+                                                $loop_count_num=1;
+                                            @endphp
+                                            @foreach($productImagesArr as $key=>$val)
+                                                @php
+                                                    $loop_count_prev=$loop_count_num;
+                                                    $pIArr=(array)$val;
+                                                @endphp
+                                                <input id="piid" type="hidden" name="piid[]" value="{{$pIArr['id']}}">
+                                                <div class="col-md-4 product_images_{{$loop_count_num++}}"  >
+                                                    <label for="images" class="control-label mb-1"> Image</label>
+                                                    <input id="images" name="images[]" type="file" class="form-control" aria-required="true" aria-invalid="false" >
+
+                                                    @if($pIArr['images']!='')
+                                                        <a href="{{asset('storage/media/'.$pIArr['images'])}}" target="_blank"><img width="100px" src="{{asset('storage/media/'.$pIArr['images'])}}"/></a>
+                                                    @endif
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <label for="images" class="control-label mb-1">
+                                                        &nbsp;&nbsp;&nbsp;</label>
+
+                                                    @if($loop_count_num==2)
+                                                        <div >
+                                                            <button type="button" class="btn btn-success" onclick="add_image_more()"><i class="fa fa-plus"></i>&nbsp; Add</button>
+                                                        </div>
+
+
+                                                    @else
+                                                        <div>
+                                                            <a href="{{url('admin/product/product_images_delete/')}}/{{$pIArr['id']}}/{{$id}}"><button type="button" class="btn btn-danger "><i class="fa fa-minus"></i>&nbsp; Remove</button></a>
+                                                        </div>
+                                                    @endif
+
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="overview-wrap">
@@ -297,7 +345,7 @@
 
             html+=' <div class="col-md-3"> <div class="form-group"> <label for="cc-payment" class="control-label mb-1">Quantity</label> <input  name="quantity[]" value="" type="text" class="form-control" aria-required="true" aria-invalid="false" required ></div> </div> ';
 
-            html+=' <div class="col-md-3" style="padding-top: 30px;"> <a class="btn btn-danger text-light " onclick=remove_more("'+loop_count+'") > <i class="fas fa-minus-circle"></i> Remove </a> </div>  ';
+            html+=' <div class="col-md-3" style="padding-top: 30px;">  <a class="btn btn-danger text-light " onclick=remove_more("'+loop_count+'") > <i class="fas fa-minus-circle"></i> Remove </a> </div>  ';
 
             html+='</div></div></div>';
 
@@ -307,6 +355,20 @@
         function remove_more(loop_count){
             jQuery('#product_attr_'+loop_count).remove();
         }
+
+        var loop_image_count=1;
+        function add_image_more(){
+            loop_image_count++;
+            var html='<input id="piid" type="hidden" name="piid[]" value=""><div class="col-md-4 product_images_'+loop_image_count+'"><label for="images" class="control-label mb-1"> Image</label><input id="images" name="images[]" type="file" class="form-control" aria-required="true" aria-invalid="false" ></div>';
+            //product_images_box
+            html+='<div class="col-md-2 product_images_'+loop_image_count+'""><label for="attr_image" class="control-label mb-1"> &nbsp;&nbsp;&nbsp;</label> <div> <button type="button" class="btn btn-danger" onclick=remove_image_more("'+loop_image_count+'")><i class="fa fa-minus"></i>&nbsp; Remove</button></div></div>';
+            jQuery('#product_images_box').append(html)
+        }
+
+        function remove_image_more(loop_image_count){
+            jQuery('.product_images_'+loop_image_count).remove();
+        }
+
     </script>
 
 @endsection
