@@ -1,13 +1,13 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SizeController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
-
+use Illuminate\Support\Facades\Route;
 
 
 //Admin Authentication
@@ -69,5 +69,14 @@ Route::group(['prefix' => 'admin','middleware' => 'admin_auth'], function () {
     Route::get('product/product_attr_delete/{paid}/{pid}',[ProductController::class,'product_attr_delete']);
     //product image delete
     Route::get('product/product_images_delete/{paid}/{pid}',[ProductController::class,'product_images_delete']);
+
+    //    ==========Brands========
+    Route::get('brand',[BrandController::class,'BrandView']);
+    Route::get('brand/manage_brand',[BrandController::class,'ManageBrandView']);
+    Route::post('brand/manage_brand_process',[BrandController::class,'ManageBrandProcess'])->name('brand.ManageBrandProcess');
+    Route::get('brand/deleteBrand/{id}',[BrandController::class,'DeleteBrand']);
+    Route::get('brand/manage_brand/{id}',[BrandController::class,'ManageBrandView']);
+    //    update brand status
+    Route::get('brand/status/{status}/{id}',[BrandController::class,'status']);
 
 });

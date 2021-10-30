@@ -16,6 +16,12 @@
                     <a href="{{url('admin/category')}}">
                         <i class="fas fa-list"></i>Category</a>
                 </li>
+
+                <li class=" @yield('brand_select') ">
+                    <a href="{{url('admin/brand')}}">
+                        <i class="far fa-bookmark"></i>Brand</a>
+                </li>
+
                 <li class=" @yield('coupon_select') ">
                     <a href="{{url('admin/coupon')}}">
                         <i class="fas fa-tags"></i>Coupon</a>
