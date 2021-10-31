@@ -20,6 +20,13 @@ class ProductModel extends Model
         'keywords',
         'technical_specification',
         'uses',
+        'warranty',
+        'lead_time',
+        'tax_id',
+        'is_promo',
+        'is_featured',
+        'is_discounted',
+        'is_trending',
         'status',
     ];
 }

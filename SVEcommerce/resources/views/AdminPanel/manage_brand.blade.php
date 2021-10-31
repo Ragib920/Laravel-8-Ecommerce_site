@@ -18,19 +18,15 @@
                                     <input  name="id" value="{{$id}}" type="hidden" >
                                     <div class="form-group">
                                         <label for="cc-payment" class="control-label mb-1">Name</label>
-                                        <input  name="name" value="{{$name}}" type="text" class="form-control" aria-required="true" aria-invalid="false" >
+                                        <input  name="name" value="{{$name}}" type="text" class="form-control" aria-required="true" aria-invalid="false" required >
                                         @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="image" class="control-label mb-1"> Image</label>
-                                        <input id="image" name="image" type="file" class="form-control" aria-required="true" aria-invalid="false">
-                                        @error('image')
-                                        <div class="alert alert-danger" role="alert">
-                                            {{$message}}
-                                        </div>
-                                        @enderror
+                                        <input id="image" name="image" type="file" class="form-control" aria-required="true" aria-invalid="false" required>
+
 
                                         @if($image!='')
                                             <img width="100px" src="{{asset('storage/media/brand/'.$image)}}"/>

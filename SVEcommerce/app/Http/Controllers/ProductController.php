@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BrandModel;
 use App\Models\CategoryModel;
 use App\Models\ColorModel;
 use App\Models\ProductAtrModel;
@@ -35,6 +36,12 @@ class ProductController extends Controller
             $result['technical_specification']=$arr['0']->technical_specification;
             $result['uses']=$arr['0']->uses;
             $result['warranty']=$arr['0']->warranty;
+            $result['lead_time']=$arr['0']->lead_time;
+            $result['tax_id']=$arr['0']->tax_id;
+            $result['is_promo']=$arr['0']->is_promo;
+            $result['is_featured']=$arr['0']->is_featured;
+            $result['is_discounted']=$arr['0']->is_discounted;
+            $result['is_tranding']=$arr['0']->is_tranding;
             $result['id']=$arr['0']->id;
 
             $result['productAttrArr']=DB::table('productAtr')->where(['product_id'=>$id])->get();
@@ -61,6 +68,12 @@ class ProductController extends Controller
             $result['technical_specification']='';
             $result['uses']='';
             $result['warranty']='';
+            $result['lead_time']='';
+            $result['tax_id']='';
+            $result['is_promo']='';
+            $result['is_featured']='';
+            $result['is_discounted']='';
+            $result['is_tranding']='';
             $result['id']=0;
 
             //Product Attribute
@@ -82,8 +95,10 @@ class ProductController extends Controller
         $category_list= CategoryModel::where(['status'=>1])->get();
         $color_list= ColorModel::where(['status'=>1])->get();
         $size_list= SizeModel::where(['status'=>1])->get();
+        $brand_list= BrandModel::where(['status'=>1])->get();
+//        $tax_list= BrandModel::where(['status'=>1])->get();
 
-        return view('AdminPanel.manage_product',$result,compact('category_list','color_list','size_list'));
+        return view('AdminPanel.manage_product',$result,compact('category_list','color_list','size_list','brand_list'));
     }
 
     public function ManageProductProcess(Request $request)
@@ -170,6 +185,12 @@ class ProductController extends Controller
         $model->technical_specification= $request->post('technical_specification');
         $model->uses= $request->post('uses');
         $model->warranty= $request->post('warranty');
+        $model->lead_time=$request->post('lead_time');
+        $model->tax_id=$request->post('tax_id');
+        $model->is_promo=$request->post('is_promo');
+        $model->is_featured=$request->post('is_featured');
+        $model->is_discounted=$request->post('is_discounted');
+        $model->is_tranding=$request->post('is_tranding');
         $model->status=1;
         $model->save();
         $pid=$model->id;
@@ -180,9 +201,9 @@ class ProductController extends Controller
             $productAttrArr=[];
             $productAttrArr['product_id']=$pid;
             $productAttrArr['sku']=$skuArr[$key];
-            $productAttrArr['mrp']=$mrpArr[$key];
-            $productAttrArr['price']=$priceArr[$key];
-            $productAttrArr['quantity']=$quantityArr[$key];
+            $productAttrArr['mrp']=(int)$mrpArr[$key];
+            $productAttrArr['price']=(int)$priceArr[$key];
+            $productAttrArr['quantity']=(int)$quantityArr[$key];
             //for empty size id
             if($size_idArr[$key]==''){
                 $productAttrArr['size_id']=0;

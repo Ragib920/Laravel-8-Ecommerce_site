@@ -18,6 +18,9 @@ class Coupon extends Migration
             $table->string('title');
             $table->string('code');
             $table->string('value');
+            $table->enum('type', ['value','per']);
+            $table->integer('min_order_amt');
+            $table->integer('is_one_time');
             $table->integer('status');
             $table->timestamps();
         });

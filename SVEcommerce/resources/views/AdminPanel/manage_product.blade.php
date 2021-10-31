@@ -12,7 +12,7 @@
     <div class="main-content">
         <div class="section__content section__content--p30">
             <div class="container-fluid">
-
+                <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
                 <div class="row">
                     <div class="col-lg-12">
                         <form action="{{route('product.ManageProductProcess')}}" method="post" enctype="multipart/form-data">
@@ -81,7 +81,20 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Brand</label>
-                                                <input  name="brand" value="{{$brand}}" type="text" class="form-control" aria-required="true" aria-invalid="false" required >
+                                                <div class="col-12 col-md-12">
+                                                    <select name="brand"  class="form-control" required="required" >
+                                                        <option value=""> Select one</option>
+                                                        @foreach($brand_list as $data)
+                                                            @if($brand==$data->id)
+                                                                <option selected value="{{$data->id}}"> {{ $data->name }}</option>
+                                                            @else
+                                                                <option  value="{{ $data->id }}"> {{ $data->name }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+{{--                                                <input  name="brand" value="{{$brand}}" type="text" class="form-control" aria-required="true" aria-invalid="false" required >--}}
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -96,13 +109,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Short Description</label>
-                                                <textarea name="short_desc"  rows="3" class="form-control" required >{{ $short_desc }}</textarea>
+                                                <textarea name="short_desc" id="short_desc "  rows="3" class="form-control" required >{{ $short_desc }}</textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Description</label>
-                                                <textarea name="desc"  rows="3" class="form-control" required> {{$desc}} </textarea>
+                                                <textarea name="desc" id=" desc "  rows="3" class="form-control" required> {{$desc}} </textarea>
 
                                             </div>
                                         </div>
@@ -111,25 +124,99 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Keywords</label>
-                                                <textarea name="keywords"  rows="3" class="form-control" required >{{$keywords}} </textarea>
+                                                <textarea name="keywords" id=" keywords "  rows="3" class="form-control" required >{{$keywords}} </textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Technical Specification</label>
-                                                <textarea name="technical_specification"  rows="3" class="form-control" required> {{$technical_specification}} </textarea>
+                                                <textarea name="technical_specification" id=" technical_specification "  rows="3" class="form-control" required> {{$technical_specification}} </textarea>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="cc-payment" class="control-label mb-1">Uses</label>
-                                        <textarea name="uses"  rows="3" class="form-control" required>{{$uses}} </textarea>
-
+                                        <textarea name="uses" id="uses"  rows="3" class="form-control" required>{{$uses}} </textarea>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="cc-payment" class="control-label mb-1">Warranty</label>
-                                        <input  name="warranty" value="{{$warranty}}" type="text" class="form-control" aria-required="true" aria-invalid="false" required >
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Warranty</label>
+                                                <input  name="warranty" value="{{$warranty}}" type="text" class="form-control" aria-required="true" aria-invalid="false" required >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="model" class="control-label mb-1"> Lead Time</label>
+                                            <input id="lead_time" value="{{$lead_time}}" name="lead_time" type="text" class="form-control" aria-required="true" aria-invalid="false">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="model" class="control-label mb-1"> Tax</label>
+                                            {{--                                                <select id="tax_id" name="tax_id" class="form-control" required>--}}
+                                            {{--                                                    <option value="">Select Tax</option>--}}
+                                            {{--                                                    @foreach($taxs as $list)--}}
+                                            {{--                                                        @if($tax_id==$list->id)--}}
+                                            {{--                                                            <option selected value="{{$list->id}}">--}}
+                                            {{--                                                        @else--}}
+                                            {{--                                                            <option value="{{$list->id}}">--}}
+                                            {{--                                                                @endif--}}
+                                            {{--                                                                {{$list->tax_desc}}--}}
+                                            {{--                                                            </option>--}}
+                                            {{--                                                            @endforeach--}}
+                                            {{--                                                </select>--}}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="model" class="control-label mb-1"> IS Promo	</label>
+                                            <select id="is_promo" name="is_promo" class="form-control" required>
+                                                @if($is_promo=='1')
+                                                    <option value="1" selected>Yes</option>
+                                                    <option value="0">No</option>
+                                                @else
+                                                    <option value="1">Yes</option>
+                                                    <option value="0" selected>No</option>
+                                                @endif
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="model" class="control-label mb-1"> IS Featured	</label>
+                                            <select id="is_featured" name="is_featured" class="form-control" required>
+                                                @if($is_featured=='1')
+                                                    <option value="1" selected>Yes</option>
+                                                    <option value="0">No</option>
+                                                @else
+                                                    <option value="1">Yes</option>
+                                                    <option value="0" selected>No</option>
+                                                @endif
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="model" class="control-label mb-1"> IS Tranding	</label>
+                                            <select id="is_tranding" name="is_tranding" class="form-control" required>
+                                                @if($is_tranding=='1')
+                                                    <option value="1" selected>Yes</option>
+                                                    <option value="0">No</option>
+                                                @else
+                                                    <option value="1">Yes</option>
+                                                    <option value="0" selected>No</option>
+                                                @endif
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="model" class="control-label mb-1"> IS Discounted	</label>
+                                            <select id="is_discounted" name="is_discounted" class="form-control" required>
+                                                @if($is_discounted=='1')
+                                                    <option value="1" selected>Yes</option>
+                                                    <option value="0">No</option>
+                                                @else
+                                                    <option value="1">Yes</option>
+                                                    <option value="0" selected>No</option>
+                                                @endif
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -368,6 +455,12 @@
         function remove_image_more(loop_image_count){
             jQuery('.product_images_'+loop_image_count).remove();
         }
+
+        CKEDITOR.replace('short_desc');
+        CKEDITOR.replace('desc');
+        CKEDITOR.replace('technical_specification');
+        CKEDITOR.replace('uses');
+        CKEDITOR.replace('keywords');
 
     </script>
 

@@ -37,11 +37,10 @@ class BrandController extends Controller
 
 
         $rules=[
-            'name'=>'required|unique:brands,name,'.$request->post('id'),
+            'name'=>'unique:brands,name,'.$request->post('id'),
             'image'=>'mimes:jpeg,jpg,png'
         ];
         $custom_message=[
-            'name.required'=>'Please enter Brand name',
             'name.unique'=>'This Brand code already exist',
             'image.mimes'=>'Image must be on jpeg,png,jpg,gif format',
 

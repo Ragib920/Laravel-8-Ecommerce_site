@@ -13,5 +13,9 @@ class CouponModel extends Model
         'title',
         'code',
         'value',
+        'type',
+        'min_order_amt',
+        'is_one_time',
+        'status',
     ];
 }
