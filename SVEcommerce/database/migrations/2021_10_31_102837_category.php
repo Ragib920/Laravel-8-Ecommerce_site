@@ -17,6 +17,9 @@ class Category extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->string('parent_category_id');
+            $table->string('category_image');
+            $table->string('is_home');
             $table->integer('status');
             $table->timestamps();
         });

@@ -24,18 +24,24 @@
                             <table class="table table-borderless table-data3">
                                 <thead>
                                 <tr>
-                                    <th>No</th>
+
                                     <th>Category Name</th>
+                                    <th>Image
                                     <th>Category Slug</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($result as $key=> $data)
+                                @foreach($result as  $data)
                                 <tr>
-                                    <td>{{ $key+1 }}</td>
+
                                     <td>{{ $data->name }}</td>
+                                    <td>
+                                        @if($data->category_image!='')
+                                            <img width="100px" src="{{asset('storage//media/category/'.$data->category_image)}}"/>
+                                        @endif
+                                    </td>
                                     <td>{{ $data->slug }}</td>
                                     <td>
                                         @if($data->status==1)
