@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TaxController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -78,5 +79,14 @@ Route::group(['prefix' => 'admin','middleware' => 'admin_auth'], function () {
     Route::get('brand/manage_brand/{id}',[BrandController::class,'ManageBrandView']);
     //    update brand status
     Route::get('brand/status/{status}/{id}',[BrandController::class,'status']);
+
+    //    ==========Tax========
+    Route::get('tax',[TaxController::class,'TaxView']);
+    Route::get('tax/manage_tax',[TaxController::class,'ManageTaxView']);
+    Route::post('tax/manage_tax_process',[TaxController::class,'ManageTaxProcess'])->name('tax.ManageTaxProcess');
+    Route::get('tax/deleteTax/{id}',[TaxController::class,'DeleteTax']);
+    Route::get('tax/manage_tax/{id}',[TaxController::class,'ManageTaxView']);
+    //    update tax status
+    Route::get('tax/status/{status}/{id}',[TaxController::class,'status']);
 
 });

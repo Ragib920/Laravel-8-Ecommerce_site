@@ -34,6 +34,10 @@
                     <a href="{{url('admin/color')}}">
                         <i class="fas fa-paint-brush"></i>Color</a>
                 </li>
+                <li class=" @yield('tax_select') ">
+                    <a href="{{url('admin/tax')}}">
+                        <i class="fas fa-lira-sign"></i>Tax</a>
+                </li>
                 <li class=" @yield('product_select') ">
                     <a href="{{url('admin/product')}}">
                         <i class="fab fa-product-hunt"></i>Product</a>
