@@ -3,6 +3,13 @@
 @section('title','Categories')
 @section('category_select','active')
 @section('content')
+
+    @if($id>0)
+        {{$image_required=" "}}
+    @else
+        {{$image_required="required"}}
+    @endif
+
     <!-- MAIN CONTENT-->
     <div class="main-content">
         <div class="section__content section__content--p30">
@@ -58,7 +65,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="image" class="control-label mb-1"> Image</label>
-                                                <input id="category_image" name="category_image" type="file" class="form-control" aria-required="true" aria-invalid="false">
+                                                <input id="category_image" name="category_image" type="file" class="form-control" aria-required="true" aria-invalid="false" {{$image_required}} >
                                                 @error('category_image')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror

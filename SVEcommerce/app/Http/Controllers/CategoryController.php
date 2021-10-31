@@ -48,14 +48,18 @@ class CategoryController extends Controller
 
     public function ManageCategoryProcess(Request $request)
     {
-//        $request->validate([
-//           'name'=>'required',
-//            'slug'=>'required|unique:category',
-//        ]);
+        //for category image validation
+        if ( $request->post('id')>0) {
+
+            $image_validation = "mimes:jpeg,png,jpg,gif|max:2048";
+        }
+        else{
+            $image_validation = "mimes:jpeg,png,jpg,gif|max:2048";
+        }
 
         $rules=[
             'name'=>'required',
-            'category_image'=>'mimes:jpeg,jpg,png,gif',
+            'category_image'=>$image_validation,
             'slug'=>'required|unique:category,slug,'.$request->post('id'),
         ];
         $custom_message=[
@@ -107,6 +111,10 @@ class CategoryController extends Controller
 
     public function DeleteCategory($id)
     {
+        $arrImage=DB::table('category')->where(['id'=>$id])->get();
+        if(Storage::exists('/public/media/category/'.$arrImage[0]->category_image)){
+            Storage::delete('/public/media/category/'.$arrImage[0]->category_image);
+        }
         CategoryModel::where('id',$id)->delete();
         return back()->with('message','Category Deleted Successfully');
     }

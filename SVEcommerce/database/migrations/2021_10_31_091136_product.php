@@ -28,7 +28,7 @@ class Product extends Migration
             $table->longText('uses');
             $table->string('warranty');
             $table->string('lead_time');
-            $table->string('tax_id');
+            $table->integer('tax_id');
             $table->integer('is_promo');
             $table->integer('is_featured');
             $table->integer('is_discounted');

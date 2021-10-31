@@ -153,18 +153,18 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="model" class="control-label mb-1"> Tax</label>
-                                            {{--                                                <select id="tax_id" name="tax_id" class="form-control" required>--}}
-                                            {{--                                                    <option value="">Select Tax</option>--}}
-                                            {{--                                                    @foreach($taxs as $list)--}}
-                                            {{--                                                        @if($tax_id==$list->id)--}}
-                                            {{--                                                            <option selected value="{{$list->id}}">--}}
-                                            {{--                                                        @else--}}
-                                            {{--                                                            <option value="{{$list->id}}">--}}
-                                            {{--                                                                @endif--}}
-                                            {{--                                                                {{$list->tax_desc}}--}}
-                                            {{--                                                            </option>--}}
-                                            {{--                                                            @endforeach--}}
-                                            {{--                                                </select>--}}
+                                            <select id="tax_id" name="tax_id" class="form-control" required>
+                                                <option value="">Select Tax</option>
+                                                @foreach($tax_list as $list)
+                                                    @if($tax_id==$list->id)
+                                                        <option selected value="{{$list->id}}">
+                                                    @else
+                                                        <option value="{{$list->id}}">
+                                                            @endif
+                                                            {{$list->tax_desc}}
+                                                        </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
 

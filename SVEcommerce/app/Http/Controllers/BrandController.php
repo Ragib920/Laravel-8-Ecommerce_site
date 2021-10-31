@@ -34,15 +34,22 @@ class BrandController extends Controller
 
     public function ManageBrandProcess(Request $request)
     {
+        if ( $request->post('id')>0) {
 
+            $image_validation = "required|mimes:jpeg,png,jpg,gif|max:2048";
+        }
+        else{
+            $image_validation = "mimes:jpeg,png,jpg,gif|max:2048";
+        }
 
         $rules=[
             'name'=>'unique:brands,name,'.$request->post('id'),
-            'image'=>'mimes:jpeg,jpg,png'
+            'image'=>$image_validation,
         ];
         $custom_message=[
             'name.unique'=>'This Brand code already exist',
             'image.mimes'=>'Image must be on jpeg,png,jpg,gif format',
+            'image.required'=>'Enter a image',
 
         ];
         $this->validate($request, $rules, $custom_message);
@@ -80,8 +87,13 @@ class BrandController extends Controller
         return back()->with('message',$msg);
     }
 
-    public function DeleteBrand($id)
+    public function DeleteBrand(Request $request ,$id)
     {
+        // $arrImage= DB::table('brands')->where(['id'=>$request->post('id')])->get();
+        $arrImage=DB::table('brands')->where(['id'=>$id])->get();
+        if(Storage::exists('/public/media/brand/'.$arrImage[0]->image)){
+            Storage::delete('/public/media/brand/'.$arrImage[0]->image);
+        }
         BrandModel::where('id',$id)->delete();
         return back()->with('message','Brand Deleted Successfully');
     }

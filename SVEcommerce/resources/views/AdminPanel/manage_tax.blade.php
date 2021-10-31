@@ -24,7 +24,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="size" class="control-label mb-1">Tax Desc </label>
+                                        <label for="size" class="control-label mb-1">Tax Description </label>
                                         <input id="tax_desc" value="{{$tax_desc}}" name="tax_desc" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
                                     </div>
 
@@ -38,11 +38,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
 
                 </div>
 

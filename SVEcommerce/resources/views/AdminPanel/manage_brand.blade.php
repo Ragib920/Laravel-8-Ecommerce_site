@@ -3,6 +3,11 @@
 @section('title','Brand')
 @section('brand_select','active')
 @section('content')
+    @if($id>0)
+        {{$image_required=" "}}
+    @else
+        {{$image_required="required"}}
+    @endif
     <!-- MAIN CONTENT-->
     <div class="main-content">
         <div class="section__content section__content--p30">
@@ -25,7 +30,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="image" class="control-label mb-1"> Image</label>
-                                        <input id="image" name="image" type="file" class="form-control" aria-required="true" aria-invalid="false" required>
+                                        <input id="image" name="image" type="file" class="form-control" aria-required="true" aria-invalid="false" {{$image_required}}>
 
 
                                         @if($image!='')
