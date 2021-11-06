@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\AdminController;
@@ -11,6 +12,12 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TaxController;
 use Illuminate\Support\Facades\Route;
 
+
+//Frontend Routes
+Route::get('/',[FrontController::class,'index']);
+//Route::get('product/{id}',[FrontController::class,'product']);
+//Route::post('add_to_cart',[FrontController::class,'add_to_cart']);
+//Route::get('cart',[FrontController::class,'cart']);
 
 //Admin Authentication
 Route::group(['prefix' => 'admin'], function () {
