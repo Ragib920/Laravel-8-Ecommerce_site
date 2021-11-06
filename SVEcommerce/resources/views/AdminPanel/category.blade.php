@@ -26,7 +26,7 @@
                                 <tr>
 
                                     <th>Category Name</th>
-                                    <th>Image
+                                    <th>Image</th>
                                     <th>Category Slug</th>
                                     <th>Status</th>
                                     <th>Action</th>

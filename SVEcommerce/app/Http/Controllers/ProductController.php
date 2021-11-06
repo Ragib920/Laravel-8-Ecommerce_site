@@ -288,12 +288,36 @@ class ProductController extends Controller
 
     public function DeleteProduct($id)
     {
-        //need to study
+
+
+        //Product info and image starts
         $arrImage=DB::table('product')->where(['id'=>$id])->get();
         if(Storage::exists('/public/media/'.$arrImage[0]->image)){
             Storage::delete('/public/media/'.$arrImage[0]->image);
         }
+        //Product table and image ends
+
+        //Product Attributes table starts
+//        $pa=DB::table('productAtr')->where(['product_id'=>$id])->get();
+//
+//        if(Storage::exists('/public/media/'.$pa[0]->attr_image)){
+//            Storage::delete('/public/media/'.$pa[0]->attr_image);
+//        }
+
+        //Product Attributes table ends
+
+        //product images table starts
+//        $pi=DB::table('productImage')->where(['product_id'=>$id])->get();
+
+//            $Image=DB::table('productImage')->where(['product_id'=>$id])->get();
+//            if(Storage::exists('/public/media/'.$pi[0]->images)){
+//                Storage::delete('/public/media/'.$pi[0]->images);
+//            }
+
+        //product images table ends
         DB::table('product')->where(['id'=>$id])->delete();
+        DB::table('productAtr')->where(['product_id'=>$id])->delete();
+        DB::table('productImage')->where(['product_id'=>$id])->delete();
         return back()->with('message','Product Deleted Successfully');
     }
 
@@ -304,6 +328,7 @@ class ProductController extends Controller
         }
         DB::table('productAtr')->where(['id'=>$paid])->delete();
         return redirect('admin/product/manage_product/'.$pid)->with('message','Attribute Deleted Successfully');
+
     }
 
     public function product_images_delete(Request $request,$paid,$pid){

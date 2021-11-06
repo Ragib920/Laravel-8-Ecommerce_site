@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\AdminController;
@@ -88,5 +89,18 @@ Route::group(['prefix' => 'admin','middleware' => 'admin_auth'], function () {
     Route::get('tax/manage_tax/{id}',[TaxController::class,'ManageTaxView']);
     //    update tax status
     Route::get('tax/status/{status}/{id}',[TaxController::class,'status']);
+
+    //    ==========Customer========
+    Route::get('customer',[CustomerController::class,'CustomerView']);
+    Route::get('customer/show/{id}',[CustomerController::class,'show']);
+
+    /*
+     Route::get('customer/manage_customer',[CustomerController::class,'ManageCustomerView']);
+    Route::post('customer/manage_customer_process',[CustomerController::class,'ManageCustomerProcess'])->name('tax.ManageTaxProcess');
+    Route::get('customer/deleteCustomer/{id}',[CustomerController::class,'DeleteCustomer']);
+    Route::get('customer/manage_customer/{id}',[CustomerController::class,'ManageCustomerView']);
+     */
+    //    update customer status
+    Route::get('customer/status/{status}/{id}',[CustomerController::class,'status']);
 
 });

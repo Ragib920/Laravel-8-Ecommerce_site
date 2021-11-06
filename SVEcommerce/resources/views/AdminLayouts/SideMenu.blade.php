@@ -42,6 +42,10 @@
                     <a href="{{url('admin/product')}}">
                         <i class="fab fa-product-hunt"></i>Product</a>
                 </li>
+                <li class=" @yield('customer_select') ">
+                    <a href="{{url('admin/customer')}}">
+                        <i class="fas fa-user"></i>Customer</a>
+                </li>
             </ul>
         </nav>
     </div>
